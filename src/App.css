@@ -68,3 +68,16 @@ border-style: solid;
 
     width: 55%;
   }
+  
+.img_carrito{
+  width: 100px;
+
+
+}
+.producto_carrito{
+  border-width: 1px;
+  border-color: gray;
+
+}
+
+

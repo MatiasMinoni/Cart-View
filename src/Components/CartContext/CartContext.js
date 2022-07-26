@@ -1,23 +1,24 @@
 import React, { createContext, useState, useEffect } from 'react'
 
-export const cartContext = createContext();
-const { Provider } = cartContext;
+    export const cartContext = createContext();
+    const { Provider } = cartContext;
 
-const CartCustomProvider = ({ children }) => {
+    const CartCustomProvider = ({ children }) => {
 
     const [products, setProducts] = useState([]);
     const [qtyProducts, setQtyProducts] = useState(0);
 
+
+    // Cantidad de productos
     const getQtyProducts = () => {
         let qty = 0;
-        products.forEach(product => qty += product.qty);
+        products.forEach(product => {qty += product.qty});
         setQtyProducts(qty);
     }
 
     useEffect(() => {
         getQtyProducts();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [products])
+            }, [products])
 
     const addProduct = (product) => {
         if (isInCart(product.id)) {
@@ -28,6 +29,7 @@ const CartCustomProvider = ({ children }) => {
             setProducts(aux);
         } else {
             setProducts([...products, product]);
+        
         };
     }
 
@@ -44,8 +46,16 @@ const CartCustomProvider = ({ children }) => {
         setQtyProducts(0);
     }
 
+    const getTotal=()=>{
+        let total=0;
+        products.forEach((e)=>total=total+ parseFloat(e.quantity*e.price))
+        
+        return total.toFixed(2);
+      }
+
     return (
-        <Provider value={{ products, addProduct, deleteProduct, clear, qtyProducts }}>
+        
+        <Provider value={{ products, addProduct, deleteProduct, clear, qtyProducts, getTotal  }}>
             {children}
         </Provider>
     )

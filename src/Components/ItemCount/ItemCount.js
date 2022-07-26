@@ -1,4 +1,3 @@
-import React from "react";
 import { useState } from "react";
 import 'materialize-css/dist/css/materialize.min.css';
 
@@ -6,40 +5,40 @@ import 'materialize-css/dist/css/materialize.min.css';
 
     
 
-const ItemCount =({initial, Count, setCount, cantidad, delivery}) => {
+export const ItemCount =({initial, Count, setCount, cantidad, onAdd}) => {
 [Count, setCount] = useState(initial);
 
-function onAdd(){
+function sumar(){
         
 setCount(Count+1);
-onAdd=document.getElementById("onAdd")
+sumar=document.getElementById("sumar")
 onRemove=document.getElementById("onRemove")
 const add_Cart=document.getElementById("addCart");
 
-onAdd.disabled=false;
+sumar.disabled=false;
 onRemove.disabled=false;
 add_Cart.disabled=false;
 
     while
     (Count>=cantidad-1){
         setCount(cantidad);
-      onAdd.disabled=true;
+      sumar.disabled=true;
         onRemove.disabled=false;
         
         break;}
       
 }
 function onRemove(){
-    onAdd=document.getElementById("onAdd")
+    sumar=document.getElementById("sumar")
     onRemove=document.getElementById("onRemove")
     const add_Cart=document.getElementById("addCart");
 setCount(Count-1);
 
 
-    onAdd.disabled=false;
+    sumar.disabled=false;
     while (Count<=1){   
         setCount(0);
-        onAdd.disabled=false;
+        sumar.disabled=false;
         onRemove.disabled=true;
         add_Cart.disabled=true;
        break;
@@ -50,8 +49,11 @@ setCount(Count-1);
     
 }
 const toCart = () => {
-    delivery(Count);
+    onAdd(Count);
+   
+
 }
+
 
 
 return (
@@ -61,7 +63,7 @@ return (
 
 <p>Agregar al carrito</p>
 
-<button  className="waves-effect waves-light btn" id="onAdd"  onClick={() => onAdd()}> + </button>
+<button  className="waves-effect waves-light btn" id="sumar"  onClick={() => sumar()}> + </button>
 
 <p>    {Count}    </p>
 

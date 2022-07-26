@@ -14,11 +14,8 @@ const ItemDetail = ({ product }) => {
   const [buyFinalized, setBuyFinalized] = useState(false)
   const { addProduct } = useContext(cartContext);
  
-  const delivery = (count) => {
-  
-   
-    
-    addProduct({...product, qty: count});
+  const onAdd = (count) => {
+    addProduct({...product, quantity:count});
   setBuyFinalized(true);
  }
 
@@ -45,10 +42,13 @@ const ItemDetail = ({ product }) => {
         
         </div>
         {buyFinalized
-          ? <Link to="/carrito">
+          ?
+        <div> <Link to="/carrito">
             <button className="waves-effect waves-light btn">Finalizar compra</button>
             </Link>
-          : <ItemCount initial={1} stock={5} delivery={delivery} />}
+            <Link to="/"><button className="waves-effect waves-light btn">Seguir comprando</button></Link>
+            </div>
+          : <ItemCount initial={1} stock={5} onAdd={onAdd} />}
       </div>
   );
 };
